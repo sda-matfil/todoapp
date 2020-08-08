@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Scrolling Nav - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="webjars/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">TODO Application</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#about">Zarejestruj</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#services">Zaloguj</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-primary text-white">
+    <div class="container text-center">
+        <h1>Witaj w aplikacji TODO</h1>
+        <p class="lead">Aplikacja stworzona przez grupę JAVA TARR 2</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form" th:object="${user}" th:action="@{/register}" method="post">
+
+                <h2>Please Sign Up <small>And create Todos.</small></h2>
+
+                <hr class="colorgraph">
+
+                <div class="form-group">
+                    <input type="text" name="email" id="email" class="form-control input-lg" placeholder="Adres email" />
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control input-lg" placeholder="Nazwa użytkownika" />
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Hasło" />
+                </div>
+
+                <div th:if="${#fields.hasErrors('email')}" >
+                    <div class="alert alert-danger" >
+                        Niepoprany adres email
+                    </div>
+                </div>
+
+                <div th:if="${#fields.hasErrors('username')}" >
+                    <div class="alert alert-danger" >
+                        Nazwa użytkownika musi mieć conajwyżej 50 znaków
+                    </div>
+                </div>
+
+                <div th:if="${#fields.hasErrors('password')}" >
+                    <div class="alert alert-danger" >
+                        Hasło musi mieć przynajmniej 8 znaków
+                    </div>
+                </div>
+
+                <hr class="colorgraph">
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                    </div>
+<!--                    <div class="col-xs-12 col-md-6"><a th:href="@{/login}" class="btn btn-success btn-block btn-lg">Sign In</a></div>-->
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="webjars/jquery/3.5.0/jquery.min.js"></script>
+<script src="webjars/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="webjars/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>
