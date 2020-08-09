@@ -1,4 +1,4 @@
-package pl.sda.todoapp;
+package pl.sda.todoapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
