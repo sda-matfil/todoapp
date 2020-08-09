@@ -10,11 +10,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sda.todoapp.dto.UserDto;
 import pl.sda.todoapp.service.UserServiceImpl;
 
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @RequestMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
 
     @RequestMapping("/register")
     public String register(Model model) {
@@ -24,7 +31,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(@ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model) {
+    public String register(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "register";
