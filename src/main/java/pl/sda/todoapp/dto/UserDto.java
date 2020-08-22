@@ -1,9 +1,13 @@
 package pl.sda.todoapp.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Pattern;
+
 public class UserDto {
 
     private String email;
 
+    @Max(8)
     private String password;
 
     private String username;

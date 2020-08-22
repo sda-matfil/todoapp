@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.todoapp.dto.TodoDto;
 import pl.sda.todoapp.entity.TodoEntity;
+import pl.sda.todoapp.entity.UserEntity;
 import pl.sda.todoapp.mapper.TodoMapper;
 import pl.sda.todoapp.repository.TodoRepository;
+import pl.sda.todoapp.repository.UserRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TodoService {
@@ -15,20 +17,25 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public ArrayList<TodoDto> getOpenTodos() {
+    @Autowired
+    private UserRepository userRepository;
 
-        return getTodos(false);
+    public List<TodoDto> getOpenTodos(String username) {
+
+        return getTodos(false, username);
     }
 
-    public ArrayList<TodoDto> getCloseTodos() {
+    public List<TodoDto> getCloseTodos(String username) {
 
-        return getTodos(true);
+        return getTodos(true, username);
     }
 
-    private ArrayList<TodoDto> getTodos(boolean closed) {
+    private List<TodoDto> getTodos(boolean closed, String username) {
 
-        ArrayList<TodoEntity> todoEntities = todoRepository.findAllByClosed(closed);
-        ArrayList<TodoDto> todoDtos = TodoMapper.mapFromEntityToDto(todoEntities);
+        UserEntity user = userRepository.findByEmail(username);
+
+        List<TodoEntity> todoEntities = todoRepository.findAllByUserAndClosed(user, closed);
+        List<TodoDto> todoDtos = TodoMapper.mapFromEntityToDto(todoEntities);
 
         return todoDtos;
     }

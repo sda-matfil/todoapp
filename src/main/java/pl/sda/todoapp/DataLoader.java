@@ -33,6 +33,13 @@ public class DataLoader implements ApplicationRunner {
 
         userRepository.save(user);
 
+        UserEntity user2 = new UserEntity();
+        user2.setEmail("jkowalski@a.pl");
+        user2.setPassword(passwordEncoder.encode("123456"));
+        user2.setUsername("jkowalski");
+
+        userRepository.save(user2);
+
         for (int i = 1; i <= 15; i++) {
             insertTodo(i, false, user);
             insertTodo(i, true, user);
@@ -43,7 +50,7 @@ public class DataLoader implements ApplicationRunner {
         TodoEntity todo = new TodoEntity();
         todo.setDescription("Zadanie " + index);
         todo.setClosed(completed);
-//        todo.setUser(user);
+        todo.setUser(user);
 
         todoRepository.save(todo);
     }

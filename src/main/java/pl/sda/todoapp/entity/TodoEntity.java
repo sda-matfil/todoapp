@@ -2,7 +2,7 @@ package pl.sda.todoapp.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Todo")
 public class TodoEntity {
 
     @Id
@@ -14,6 +14,10 @@ public class TodoEntity {
 
     @Column(nullable = false)
     private boolean closed;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     public Long getId() {
         return id;
@@ -37,5 +41,13 @@ public class TodoEntity {
 
     public void setClosed(boolean closed) {
         this.closed = closed;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

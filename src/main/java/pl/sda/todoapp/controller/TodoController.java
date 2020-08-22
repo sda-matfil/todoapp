@@ -1,6 +1,8 @@
 package pl.sda.todoapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,17 @@ public class TodoController {
     @RequestMapping("/todos")
     public String todos(Model model) {
 
-        ArrayList<TodoDto> todos = todoService.getOpenTodos();
-        ArrayList<TodoDto> completed = todoService.getCloseTodos();
+        String username = null;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        List<TodoDto> todos = todoService.getOpenTodos(username);
+        List<TodoDto> completed = todoService.getCloseTodos(username);
 
         model.addAttribute("todos", todos);
         model.addAttribute("completed", completed);

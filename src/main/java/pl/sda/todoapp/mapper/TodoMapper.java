@@ -4,6 +4,7 @@ import pl.sda.todoapp.dto.TodoDto;
 import pl.sda.todoapp.entity.TodoEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TodoMapper {
 
@@ -16,7 +17,7 @@ public class TodoMapper {
         return dto;
     }
 
-    public static ArrayList<TodoDto> mapFromEntityToDto(ArrayList<TodoEntity> entities) {
+    public static List<TodoDto> mapFromEntityToDto(List<TodoEntity> entities) {
 
         ArrayList<TodoDto> todoDtos = new ArrayList<>();
 

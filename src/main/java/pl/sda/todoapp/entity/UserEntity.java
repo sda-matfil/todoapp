@@ -1,8 +1,9 @@
 package pl.sda.todoapp.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Entity
+@Entity(name = "Users")
 public class UserEntity {
 
     @Id
@@ -17,6 +18,9 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<TodoEntity> todos;
 
     public Long getId() {
         return id;
