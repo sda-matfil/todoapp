@@ -13,6 +13,8 @@ public class TodoMapper {
         TodoDto dto = new TodoDto();
         dto.setDescritpion(entity.getDescription());
         dto.setClosed(entity.isClosed());
+        dto.setOwner(entity.getUser().getEmail());
+        dto.setId(entity.getId());
 
         return dto;
     }
@@ -27,4 +29,11 @@ public class TodoMapper {
 
         return todoDtos;
     }
+
+//    public static TodoDto mapFromDtoToEntity(TodoDto dto) {
+//
+//        TodoEntity entity = new TodoEntity();
+//        entity.setDescription(dto.getDescritpion());
+//        entity.setUser();
+//    }
 }

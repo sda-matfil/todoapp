@@ -13,4 +13,6 @@ public interface TodoRepository extends CrudRepository<TodoEntity, Long> {
 //    List<TodoEntity> findAllByClosed(boolean closed);
 
     List<TodoEntity> findAllByUserAndClosed(UserEntity user, boolean closed);
+
+    TodoEntity getById(Long id);
 }

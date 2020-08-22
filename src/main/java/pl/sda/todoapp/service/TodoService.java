@@ -39,4 +39,30 @@ public class TodoService {
 
         return todoDtos;
     }
+
+    public TodoDto addTodo(TodoDto todo) {
+
+        UserEntity user = userRepository.findByEmail(todo.getOwner());
+
+        // TodoDto
+        // username
+        TodoEntity entity = new TodoEntity();
+        entity.setDescription(todo.getDescritpion());
+        entity.setUser(user);
+        entity.setClosed(todo.isClosed());
+        entity.setId(todo.getId());
+
+        entity = todoRepository.save(entity);
+
+        return TodoMapper.mapFromEntityToDto(entity);
+    }
+
+    public void completeTodo(Long id) {
+        TodoEntity todo = todoRepository.getById(id);
+
+        if (todo != null) {
+            todo.setClosed(true);
+            todoRepository.save(todo);
+        }
+    }
 }
